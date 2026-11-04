@@ -1,0 +1,17 @@
+{
+  "name": "micro-frontend-vite-react",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"REMOTE,HOST\" -c \"cyan,magenta\" \"yarn workspace @mfe/remote preview\" \"yarn workspace @mfe/host dev\"",
+    "dev:all": "concurrently -n \"REMOTE,HOST\" -c \"cyan,magenta\" \"yarn workspace @mfe/remote dev\" \"yarn workspace @mfe/host dev\"",
+    "build": "yarn workspace @mfe/remote build && yarn workspace @mfe/host build",
+    "preview": "concurrently -n \"REMOTE,HOST\" -c \"cyan,magenta\" \"yarn workspace @mfe/remote preview\" \"yarn workspace @mfe/host preview\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
