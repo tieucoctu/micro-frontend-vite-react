@@ -1,35 +1,24 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import federation from '@originjs/vite-plugin-federation';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   plugins: [
     react(),
-    federation({
-      name: 'remoteApp',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './RemoteButton': './src/components/RemoteButton.jsx',
-        './RemoteWidget': './src/components/RemoteWidget.jsx',
-        './RemoteApp': './src/App.jsx'
-      },
-      shared: ['react', 'react-dom']
+    visualizer({
+      filename: 'dist/stats.html',
+      open: false,
+      gzipSize: true,
+      brotliSize: true,
+      title: 'Vite Chunk Visualizer - PageA & PageB & Lodash-es'
     })
   ],
-  build: {
-    modulePreload: false,
-    target: 'esnext',
-    minify: false,
-    cssCodeSplit: false
-  },
   server: {
     port: 5001,
-    strictPort: true,
-    cors: true
+    strictPort: true
   },
   preview: {
     port: 5001,
-    strictPort: true,
-    cors: true
+    strictPort: true
   }
 });
